@@ -66,14 +66,15 @@ async function ensureDbInitialized() {
   }
 }
 
-// Export the webhook handler
+// Export the webhook handler for Vercel
 export default async (req: any, res: any) => {
   try {
     // Initialize DB on cold start
     await ensureDbInitialized();
     
-    // Handle the webhook
-    return await webhookCallback(bot, "std/http")(req, res);
+    // Handle the webhook using std/http adapter
+    const handler = webhookCallback(bot, "std/http");
+    await handler(req, res);
   } catch (error) {
     console.error("Webhook error:", error);
     res.status(500).json({ error: "Internal server error" });
