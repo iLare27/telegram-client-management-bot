@@ -1,0 +1,30 @@
+{
+  "welcome": {
+    "new_client": "👋 Welcome, {{firstName}}!\n\nPlease describe your technical task or question, and our team will assist you shortly.\n\n💬 All your messages will be forwarded to our support team.",
+    "returning_client": "👋 Welcome back, {{firstName}}!\n\nYour conversation with our team is ongoing. Please describe your task or question, and we'll assist you shortly.",
+    "topic_recreated": "👋 Welcome back, {{firstName}}!\n\nYour previous conversation was closed. I'm creating a new topic for you..."
+  },
+  "errors": {
+    "unable_to_identify": "❌ Unable to identify user.",
+    "general_error": "❌ An error occurred while setting up your conversation. Please try again later or contact support.",
+    "message_send_failed": "❌ Failed to send your message. Please try again.",
+    "need_start_first": "⚠️ Please start a conversation first by sending /start",
+    "failed_to_forward": "❌ Failed to forward message to client. They may have blocked the bot."
+  },
+  "help": {
+    "client": "🤖 *Client Management Bot*\n\n*Commands:*\n/start - Start a conversation with support\n/help - Show this help message\n\n*How it works:*\n1. Send /start to begin\n2. Describe your task or question\n3. Our team will respond to you directly\n4. All messages are forwarded automatically",
+    "team": "🤖 *Team Bot Help*\n\nThis bot creates a forum topic for each client.\nReply to messages in the topic to communicate with clients.\n\n*Supported message types:*\n• Text messages\n• Photos\n• Documents\n• Videos\n• Voice messages\n• Audio files"
+  },
+  "notifications": {
+    "new_client_topic": "🆕 New client conversation started!\n\n👤 Name: {{firstName}}\n{{username}}🆔 User ID: {{userId}}\n📅 {{timestamp}}\n\nInitial message: /start",
+    "client_reconnected": "🔄 Client reconnected:\n👤 {{firstName}} {{username}}\n🆔 User ID: {{userId}}\n📅 {{timestamp}}",
+    "team_message_prefix": "💬 {{teamMemberName}}{{teamUsername}}:\n\n"
+  },
+  "console": {
+    "topic_created": "✅ Created new topic for user {{userId}}: {{topicName}}",
+    "topic_deleted_recreating": "⚠️  Topic {{topicId}} was deleted for user {{userId}}. Recreating...",
+    "message_forwarded_to_topic": "📤 Forwarded message from user {{userId}} to topic {{topicId}}",
+    "message_forwarded_to_client": "📥 Forwarded team message to user {{userId}}"
+  }
+}
+
