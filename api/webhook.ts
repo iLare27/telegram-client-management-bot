@@ -74,7 +74,7 @@ export default async (req: any, res: any) => {
     
     // Handle the webhook using std/http adapter
     const handler = webhookCallback(bot, "std/http");
-    await handler(req, res);
+    await handler(req as Request);
   } catch (error) {
     console.error("Webhook error:", error);
     res.status(500).json({ error: "Internal server error" });
