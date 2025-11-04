@@ -1,16 +1,26 @@
 /**
- * Database connection setup using TypeORM with SQLite
+ * Database connection setup using TypeORM with PostgreSQL
  */
 
 import "reflect-metadata";
 import { DataSource, Repository } from "typeorm";
 import { ClientTopic } from "./entity/ClientTopic.js";
+import dotenv from "dotenv";
+
+dotenv.config(); // Load DATABASE_URL from .env
+
+// Example DATABASE_URL:
+// postgres://user:password@host:port/dbname
 
 export const AppDataSource = new DataSource({
-  type: "better-sqlite3",
-  database: "bot.sqlite",
-  synchronize: true, // Auto-creates tables (use migrations in production)
+  type: "postgres",
+  url: process.env.DATABASE_URL, // Safe & flexible for deployment
+  synchronize: true, // Auto-create tables (disable in production, use migrations instead)
   logging: false,
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
   entities: [ClientTopic],
 });
 
@@ -22,12 +32,15 @@ let clientTopicRepository: Repository<ClientTopic> | null = null;
  */
 export async function initializeDatabase(): Promise<void> {
   try {
+    if (!process.env.DATABASE_URL) {
+      throw new Error("DATABASE_URL environment variable is missing.");
+    }
+
     await AppDataSource.initialize();
-    // Initialize singleton repository after connection
     clientTopicRepository = AppDataSource.getRepository(ClientTopic);
-    console.log("✅ Database connection established");
+    console.log("✅ PostgreSQL database connection established");
   } catch (error) {
-    console.error("❌ Error during database initialization:", error);
+    console.error("❌ Error during PostgreSQL database initialization:", error);
     throw error;
   }
 }
@@ -42,4 +55,3 @@ export function getClientTopicRepository(): Repository<ClientTopic> {
   }
   return clientTopicRepository;
 }
-
